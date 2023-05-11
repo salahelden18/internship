@@ -187,6 +187,13 @@ class _AuthScreenState extends State<AuthScreen>
         BlocConsumer<AuthCubit, AuthStates>(listener: (context, state) {
           if (state is AuthenticateErrorState) {
             showToast(state.message, Colors.red);
+          } else if (state is RegisteredSuccessfullyState) {
+            showToast(state.message, Colors.green);
+            setState(() {
+              authentication = authentication == Authentication.signin
+                  ? Authentication.signup
+                  : Authentication.signin;
+            });
           }
         }, builder: (context, state) {
           if (state is AuthLoginLoadingState) {
@@ -200,8 +207,13 @@ class _AuthScreenState extends State<AuthScreen>
             onPress: () {
               bool isValid = _formKey.currentState!.validate();
               if (isValid) {
-                BlocProvider.of<AuthCubit>(context)
-                    .login(_emailController.text, _passwordController.text);
+                if (authentication == Authentication.signup) {
+                  BlocProvider.of<AuthCubit>(context)
+                      .signup(_emailController.text);
+                } else {
+                  BlocProvider.of<AuthCubit>(context)
+                      .login(_emailController.text, _passwordController.text);
+                }
               }
             },
           );

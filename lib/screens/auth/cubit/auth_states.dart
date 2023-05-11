@@ -25,3 +25,12 @@ class AuthenticateErrorState extends AuthStates {
   @override
   List<Object> get props => [message];
 }
+
+class RegisteredSuccessfullyState extends AuthStates {
+  final String message;
+
+  const RegisteredSuccessfullyState(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

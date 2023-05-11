@@ -18,12 +18,16 @@ class JobItemWidget extends StatelessWidget {
         Flexible(
           flex: 2,
           child: Container(
+            height: 100,
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(width: 1.5, color: Colors.grey),
             ),
-            child: Image.asset('assets/images/intern.png'),
+            child: Image.network(
+              job.company.logo,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
         const SizedBox(width: 10),

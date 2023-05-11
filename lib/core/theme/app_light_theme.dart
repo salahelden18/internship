@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:internship/core/global/colors.dart';
+import 'package:internship/core/helpers/custom_route.dart';
 
 ThemeData lightThemeData = ThemeData(
   scaffoldBackgroundColor: Colors.white,
+  pageTransitionsTheme: PageTransitionsTheme(builders: {
+    TargetPlatform.android: CustomPageTransitionBuilder(),
+    TargetPlatform.iOS: CustomPageTransitionBuilder(),
+  }),
   appBarTheme: const AppBarTheme(
     elevation: 0,
     backgroundColor: Colors.white,

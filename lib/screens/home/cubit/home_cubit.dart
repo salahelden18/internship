@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/core/global/http_exception.dart';
 import 'package:internship/models/data_model.dart';
+import 'package:internship/models/practice_submission.dart';
 import 'package:internship/screens/home/cubit/home_cubit_states.dart';
 import 'package:internship/services/data_service.dart';
 
@@ -24,4 +25,49 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(const HomeErrorState('Something Went Wrong'));
     }
   }
+
+  Future<void> updateCv(String cv) async {
+    emit(UpdatignCvState());
+
+    try {
+      dataModel?.cv = await _dataService.updateCv(cv);
+      emit(UpdateSuccessState());
+    } catch (e) {
+      print(e);
+      emit(const UpdatingErrorState('Something Went Wrong'));
+    }
+  }
+
+  Future<void> applyForIntern(Map<String, dynamic> data) async {
+    emit(ApplyForInternLoadingState());
+
+    try {
+      PracticeSubmissions practiceSubmissions =
+          await _dataService.internshipSubmit(data);
+
+      dataModel!.internships
+          .firstWhere((element) => element.id == practiceSubmissions.practise)
+          .practiceSubmissions
+          .add(practiceSubmissions);
+
+      emit(ApplyForInternSuccessState());
+    } on HttpException catch (e) {
+      emit(ApplyForInternErrorState(e.message));
+    } catch (e) {
+      print(e);
+      emit(const ApplyForInternErrorState('Something Went Wrong'));
+    }
+  }
+
+  // Future<void> updateProfilePic(String profilePic) async {
+  //   emit(UpdatignCvState());
+
+  //   try {
+  //     dataModel?.profilePic = await _dataService.updateUserProfilePic(profilePic);
+  //     emit(UpdateSuccessState());
+  //   } catch (e) {
+  //     print(e);
+  //     emit(const UpdatingErrorState('Something Went Wrong'));
+  //   }
+  // }
 }

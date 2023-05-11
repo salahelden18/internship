@@ -8,7 +8,6 @@ import 'package:internship/screens/home/home_screen.dart';
 import 'package:internship/screens/job/job_details_screen.dart';
 import 'package:internship/widgets/divider_widget.dart';
 import 'package:internship/widgets/icon_button_widget.dart';
-import 'package:internship/widgets/space_height.dart';
 
 import '../../widgets/job_item_widget.dart';
 

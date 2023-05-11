@@ -6,8 +6,14 @@ import 'package:internship/screens/changePassword/change_password_screen.dart';
 import 'package:internship/screens/changePassword/cubit/change_password_cubit.dart';
 import 'package:internship/screens/files_screen.dart';
 import 'package:internship/screens/home/cubit/home_cubit.dart';
+import 'package:internship/screens/home/update_cv_screen.dart';
+import 'package:internship/screens/internship_applay_screen.dart';
+import 'package:internship/screens/internship_screen.dart';
+import 'package:internship/screens/internship_status_screen.dart';
+import 'package:internship/screens/job/cubit/job_cubit.dart';
 import 'package:internship/screens/job/job_details_screen.dart';
 import 'package:internship/screens/job/job_screen.dart';
+import 'package:internship/screens/profile_screen.dart';
 import 'package:internship/screens/staticScreens/about_screen.dart';
 import 'package:internship/screens/auth/auth_screen.dart';
 import 'package:internship/screens/auth/cubit/auth_cubit.dart';
@@ -19,6 +25,7 @@ import 'package:internship/screens/staticScreens/privacy_policy_screen.dart';
 import 'package:internship/services/authenticate_service.dart';
 import 'package:internship/services/change_password_service.dart';
 import 'package:internship/services/data_service.dart';
+import 'package:internship/services/job_service.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -44,6 +51,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(create: (_) => HomeCubit(DataService())),
+        BlocProvider(create: (_) => JobCubit(JobService())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -74,6 +82,13 @@ class MyApp extends StatelessWidget {
           FilesScreen.routeName: (ctx) => const FilesScreen(),
           JobScreen.routeName: (ctx) => const JobScreen(),
           JobDetailsScreen.routeName: (ctx) => const JobDetailsScreen(),
+          UpdateCvScreen.routeName: (ctx) => const UpdateCvScreen(),
+          ProfileScreen.routeName: (ctx) => const ProfileScreen(),
+          InternshipScreen.routeName: (ctx) => const InternshipScreen(),
+          InternshipApplayScreen.routeName: (ctx) =>
+              const InternshipApplayScreen(),
+          InternshipStatusScreen.routeName: (ctx) =>
+              const InternshipStatusScreen(),
         },
       ),
     );

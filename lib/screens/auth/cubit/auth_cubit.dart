@@ -13,11 +13,24 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(AuthLoginLoadingState());
 
     try {
-      print('Entered the cubit auth');
       await _authenticateService.login(email, password);
-      print('Executed');
 
       emit(AuthenticatedState());
+    } on HttpException catch (e) {
+      emit(AuthenticateErrorState(e.message));
+    } catch (e) {
+      print(e);
+      emit(const AuthenticateErrorState('Something Went Wrong'));
+    }
+  }
+
+  Future<void> signup(String email) async {
+    emit(AuthLoginLoadingState());
+
+    try {
+      String message = await _authenticateService.signup(email);
+
+      emit(RegisteredSuccessfullyState(message));
     } on HttpException catch (e) {
       emit(AuthenticateErrorState(e.message));
     } catch (e) {
@@ -39,6 +52,18 @@ class AuthCubit extends Cubit<AuthStates> {
       }
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> logout() async {
+    emit(AuthLoadingState());
+
+    try {
+      _authenticateService.logout();
+      emit(NotAuthenticatedState());
+    } catch (e) {
+      print(e);
+      emit(const AuthenticateErrorState('Something Went Wrong'));
     }
   }
 }

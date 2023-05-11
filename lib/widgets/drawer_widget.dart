@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship/screens/auth/cubit/auth_cubit.dart';
 import 'package:internship/screens/files_screen.dart';
 import 'package:internship/screens/staticScreens/about_screen.dart';
 import 'package:internship/screens/settings/settings_screen.dart';
@@ -62,7 +64,9 @@ class DrawerWidget extends StatelessWidget {
                 children: [
                   const DividerWidget(),
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<AuthCubit>().logout();
+                    },
                     icon: const Icon(
                       Icons.exit_to_app_outlined,
                       color: Colors.black,

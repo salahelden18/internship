@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship/core/utils/get_name_from_email.dart';
+import 'package:internship/screens/home/cubit/home_cubit.dart';
+import 'package:internship/screens/home/update_cv_screen.dart';
 import 'package:internship/widgets/space_height.dart';
 
 class DrawerUserItem extends StatelessWidget {
@@ -6,13 +10,38 @@ class DrawerUserItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = context.watch<HomeCubit>().dataModel;
     return Row(
       children: [
-        const CircleAvatar(
-          radius: 40,
-          backgroundImage: NetworkImage(
-            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          ),
+        Stack(
+          children: [
+            CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(
+                userData!.profilePic.isNotEmpty
+                    ? userData.profilePic
+                    : 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c29mdHdhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
+              ),
+            ),
+            if (userData.cv == null)
+              Positioned(
+                top: 0,
+                right: 0,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(UpdateCvScreen.routeName);
+                  },
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
         const SizedBox(
           width: 10,
@@ -22,10 +51,10 @@ class DrawerUserItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text('Salahelden Abdelshafy'),
+              Text(getNameFromEmail(userData.email)),
               const SpaceHeight(height: 10),
               Text(
-                'Salahelden.Abdelshafy@st.uskudar.edu.tr',
+                userData.email,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall,
               ),

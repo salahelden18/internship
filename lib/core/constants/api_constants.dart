@@ -4,4 +4,10 @@ class ApiConstants {
   static const String loginUrl = '$baseUrl/token/login/';
   static const String changePassword = '$baseUrl/user/users/set_password/';
   static const String allData = '$baseUrl/student/api/data';
+  static const String updateCv = '$baseUrl/student/api/cvupdate';
+  static const String applyJob = '$baseUrl/student/api/job/applay';
+  static const String logoutUrl = '$baseUrl/token/logout/';
+  static const String internSubmit = '$baseUrl/student/api/intershipsubmittion';
+  static const String updateUser = '$baseUrl/student/api/update';
+  static const String registerUrl = '$baseUrl/api/register';
 }

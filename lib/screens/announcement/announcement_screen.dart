@@ -27,7 +27,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 360),
     );
     _animation = Tween<Offset>(
       begin: const Offset(0, 0.3),

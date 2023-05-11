@@ -35,6 +35,34 @@ class AuthenticateService {
     }
   }
 
+  Future<String> signup(String email) async {
+    final response = await http.post(
+      Uri.parse(ApiConstants.registerUrl),
+      body: json.encode({
+        'email': email,
+      }),
+      headers: {'content-type': 'application/json'},
+    );
+
+    final decodedResponse = jsonDecode(response.body);
+
+    if (response.statusCode == 201 && decodedResponse is Map<String, dynamic>) {
+      final List<String> messages = [];
+
+      decodedResponse
+          .forEach((key, value) => messages.add(decodedResponse[key]));
+
+      return messages[0];
+    } else {
+      final List<String> messages = [];
+
+      decodedResponse
+          .forEach((key, value) => messages.add(decodedResponse[key]));
+
+      throw HttpException(messages[0]);
+    }
+  }
+
   Future<LoginModel?>? autoLogin() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
@@ -52,5 +80,15 @@ class AuthenticateService {
     final extractedUserData = LoginModel.fromJson(extractedUserDataMap);
 
     return extractedUserData;
+  }
+
+  Future<void> logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await http.post(Uri.parse(ApiConstants.logoutUrl), headers: {
+      'Content-Type': 'application/json',
+    });
+
+    await prefs.remove('userData');
   }
 }

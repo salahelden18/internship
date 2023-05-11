@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/screens/announcement/announcement_screen.dart';
+import 'package:internship/screens/auth/cubit/auth_cubit.dart';
 import 'package:internship/screens/home/cubit/home_cubit.dart';
 import 'package:internship/screens/home/cubit/home_cubit_states.dart';
+import 'package:internship/screens/internship_screen.dart';
 import 'package:internship/screens/job/job_screen.dart';
+import 'package:internship/screens/profile_screen.dart';
 import 'package:internship/widgets/drawer_widget.dart';
 import 'package:internship/widgets/home/home_item_widget.dart';
 import 'package:internship/widgets/icon_button_widget.dart';
@@ -37,7 +40,9 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<AuthCubit>().logout();
+                      },
                       child: const Text('Logout'),
                     ),
                     TextButton(
@@ -57,9 +62,14 @@ class HomeScreen extends StatelessWidget {
             const SpaceHeight(
               height: 30,
             ),
-            const HomeItemWidget(
-              imgPath: 'intern.png',
-              text: 'My Internships',
+            InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(InternshipScreen.routeName);
+              },
+              child: const HomeItemWidget(
+                imgPath: 'intern.png',
+                text: 'My Internships',
+              ),
             ),
             const SpaceHeight(),
             InkWell(
@@ -81,14 +91,16 @@ class HomeScreen extends StatelessWidget {
     return AppBar(
       actions: [
         IconButtonWidget(
-          icon: Icons.notifications,
+          icon: Icons.notifications_outlined,
           onPress: () {
             Navigator.of(context).pushNamed(AnnouncementScreen.routeName);
           },
         ),
         IconButtonWidget(
           icon: Icons.person_2_outlined,
-          onPress: () {},
+          onPress: () {
+            Navigator.of(context).pushNamed(ProfileScreen.routeName);
+          },
         ),
       ],
     );

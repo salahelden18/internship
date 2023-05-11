@@ -1,22 +1,38 @@
 import 'package:equatable/equatable.dart';
 import 'package:internship/models/announcement_model.dart';
 import 'package:internship/models/downloadable_files_model.dart';
+import 'package:internship/models/internship_model.dart';
 
 import 'job_model.dart';
 
+// ignore: must_be_immutable
 class DataModel extends Equatable {
   final int user;
-  final String? cv;
+  String? cv;
+  final String email;
+  final String name;
+  final String profilePic;
+  final String departmentName;
+  final int department;
+  final int year;
   final List<DownloadableFiles> downloadableFiles;
   final List<JobModel> jobs;
   final List<AnnouncementModel> announcement;
+  final List<InternshipModel> internships;
 
-  const DataModel({
+  DataModel({
     required this.user,
     required this.cv,
     required this.downloadableFiles,
     required this.jobs,
     required this.announcement,
+    required this.department,
+    required this.departmentName,
+    required this.name,
+    required this.profilePic,
+    required this.year,
+    required this.email,
+    required this.internships,
   });
 
   factory DataModel.fromJson(Map<String, dynamic> json) {
@@ -35,15 +51,39 @@ class DataModel extends Equatable {
     final announcements =
         announcementsList.map((e) => AnnouncementModel.fromJson(e)).toList();
 
+    List<dynamic> internshipList = json['internships'];
+    final internships =
+        internshipList.map((e) => InternshipModel.fromJson(e)).toList();
+
     return DataModel(
       cv: json['cv'],
       user: json['user'],
+      department: json['department'],
+      departmentName: json['department_name'],
+      name: json['name'],
+      profilePic: json['profile_pic'],
+      year: json['year'],
+      email: json['email'],
       downloadableFiles: files,
       jobs: jobs,
       announcement: announcements,
+      internships: internships,
     );
   }
 
   @override
-  List<Object?> get props => [user, cv, downloadableFiles, jobs, announcement];
+  List<Object?> get props => [
+        user,
+        cv,
+        downloadableFiles,
+        jobs,
+        announcement,
+        name,
+        profilePic,
+        department,
+        departmentName,
+        year,
+        email,
+        internships,
+      ];
 }

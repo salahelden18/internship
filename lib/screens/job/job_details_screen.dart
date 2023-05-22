@@ -94,7 +94,7 @@ class JobDetailsScreen extends StatelessWidget {
                   return MyCustomButton(
                     height: 40,
                     width: 250,
-                    text: 'Applay',
+                    text: 'Apply',
                     onPress: () {
                       if (cv == null) {
                         showDialog(

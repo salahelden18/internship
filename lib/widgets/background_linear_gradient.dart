@@ -8,6 +8,7 @@ class BackgroundLinearGradient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height * 0.40,
@@ -53,7 +54,7 @@ class BackgroundLinearGradient extends StatelessWidget {
             Image.asset(
               'assets/images/logo.png',
               width: 180,
-              height: 130,
+              height: size.height <= 534 ? 90 : 130,
             )
           ],
         ),

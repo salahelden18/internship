@@ -13,7 +13,13 @@ class AuthLoginLoadingState extends AuthStates {}
 
 class AuthLoadingState extends AuthStates {}
 
-class AuthenticatedState extends AuthStates {}
+// class AuthenticatedState extends AuthStates {}
+
+class StudentAuthenticatedState extends AuthStates {}
+
+class CoordinatorAuthenticatedState extends AuthStates {}
+
+class CareerCenterAuthenticatedState extends AuthStates {}
 
 class NotAuthenticatedState extends AuthStates {}
 

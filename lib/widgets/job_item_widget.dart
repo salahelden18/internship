@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:internship/widgets/space_height.dart';
 
 import '../models/job_model.dart';
 
@@ -40,25 +39,25 @@ class JobItemWidget extends StatelessWidget {
               Text(
                 job.title,
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const SpaceHeight(height: 5),
+              // const SpaceHeight(height: 5),
               Text(
                 job.company.title,
                 style: const TextStyle(fontSize: 18, color: Colors.black54),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SpaceHeight(height: 5),
+              // const SpaceHeight(height: 5),
               Text(
                 job.company.location,
                 style: const TextStyle(color: Colors.black45),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
-              const SpaceHeight(height: 5),
+              // const SpaceHeight(height: 5),
               Text(
                 job.employementType,
                 style: const TextStyle(color: Colors.black38),

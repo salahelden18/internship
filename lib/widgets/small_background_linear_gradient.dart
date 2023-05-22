@@ -10,9 +10,10 @@ class SmallbackgroundLinearGradient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.15,
+      height: size.height <= 534 ? size.height * 0.20 : size.height * 0.15,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(40),

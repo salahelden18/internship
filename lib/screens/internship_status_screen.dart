@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:internship/core/global/colors.dart';
 import 'package:internship/core/utils/status_to_string.dart';
 import 'package:internship/screens/home/home_screen.dart';
 import 'package:internship/screens/internship_applay_screen.dart';

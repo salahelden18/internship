@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship/core/constants/api_constants.dart';
 import 'package:internship/core/utils/get_name_from_email.dart';
 import 'package:internship/screens/home/cubit/home_cubit.dart';
 import 'package:internship/widgets/background_linear_gradient.dart';
@@ -12,6 +13,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = context.watch<HomeCubit>().dataModel;
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
         children: [
@@ -24,13 +26,13 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     SpaceHeight(
-                      height: MediaQuery.of(context).size.height * 0.30,
+                      height: MediaQuery.of(context).size.height * 0.32,
                     ),
                     CircleAvatar(
-                      radius: 60,
+                      radius: size.width <= 320 ? 40 : 60,
                       backgroundImage: NetworkImage(
                         data!.profilePic.isNotEmpty
-                            ? data.profilePic
+                            ? '${ApiConstants.baseUrl}/media/${data.profilePic}'
                             : 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c29mdHdhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
                       ),
                     ),
@@ -45,15 +47,16 @@ class ProfileScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
+                  fontSize: size.width <= 320 ? 20 : null,
                 ),
           ),
           const SpaceHeight(height: 10),
           Text(
-            data.departmentName,
+            data.departmentName ?? 'Not Added Yet',
             style: Theme.of(context)
                 .textTheme
                 .displaySmall!
-                .copyWith(fontSize: 18),
+                .copyWith(fontSize: size.width <= 320 ? 14 : 18),
           )
         ],
       ),

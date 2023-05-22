@@ -10,8 +10,10 @@ import 'package:internship/models/internship_model.dart';
 import 'package:internship/screens/home/cubit/home_cubit.dart';
 import 'package:internship/screens/home/cubit/home_cubit_states.dart';
 import 'package:internship/widgets/background_linear_gradient.dart';
+import 'package:internship/widgets/create_official_letter_widget.dart';
 import 'package:internship/widgets/custom_elevated_button.dart';
 import 'package:internship/widgets/header_widget.dart';
+import 'package:internship/widgets/home/floating_vertical_button.dart';
 import 'package:internship/widgets/loading.dart';
 import 'package:internship/widgets/main_content_widget.dart';
 import 'package:internship/widgets/space_height.dart';
@@ -35,6 +37,8 @@ class _InternshipApplayScreenState extends State<InternshipApplayScreen>
   File? internForm;
   File? transkriptForm;
   File? companyHistoryForm;
+
+  final TextEditingController _controller = TextEditingController();
 
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
@@ -71,10 +75,16 @@ class _InternshipApplayScreenState extends State<InternshipApplayScreen>
 
   @override
   Widget build(BuildContext context) {
-    final internshipModel =
-        ModalRoute.of(context)!.settings.arguments as InternshipModel;
+    final fetchedData =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final internshipModel = fetchedData['model'] as InternshipModel;
+    final email = fetchedData['email'] as String;
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton:
+          getFloatingVerticalButtons(context, _controller, internshipModel.id),
+      // floatingActionButton: buildFloatingActionButton(context, email,
+      //     _controller, internshipModel.coordinator.email, internshipModel.id),
       body: SizedBox(
         height: size.height,
         child: Stack(
@@ -326,7 +336,7 @@ class _InternshipApplayScreenState extends State<InternshipApplayScreen>
       title: Text(
         'Is International',
         style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-              fontSize: 24,
+              fontSize: MediaQuery.of(context).size.width <= 320 ? 18 : 24,
               fontWeight: FontWeight.normal,
             ),
       ),

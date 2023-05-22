@@ -17,24 +17,38 @@ class InternshipScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = context.watch<HomeCubit>().dataModel;
+
     return Scaffold(
       appBar: _buildAppBar(context),
       body: ListView.builder(
         padding: const EdgeInsets.all(10),
-        itemBuilder: (context, index) => GestureDetector(
-          onTap: () {
-            if (data.internships[index].practiceSubmissions.isEmpty) {
-              Navigator.of(context).pushNamed(
-                InternshipApplayScreen.routeName,
-                arguments: data.internships[index],
-              );
-            } else {
-              Navigator.of(context).pushNamed(InternshipStatusScreen.routeName,
-                  arguments: data.internships[index]);
-            }
-          },
-          child: InternshipItem(title: data!.internships[index].title),
-        ),
+        itemBuilder: (context, index) {
+          final bool done = data!.internships[index].practiceSubmissions
+              .where((element) =>
+                  element.insurance.insuranceFile != null &&
+                  element.status == 1)
+              .toList()
+              .isNotEmpty;
+          return GestureDetector(
+            onTap: () {
+              if (data.internships[index].practiceSubmissions.isEmpty) {
+                Navigator.of(context).pushNamed(
+                  InternshipApplayScreen.routeName,
+                  arguments: {
+                    'model': data.internships[index],
+                    'email': data.email,
+                  },
+                );
+              } else {
+                Navigator.of(context).pushNamed(
+                    InternshipStatusScreen.routeName,
+                    arguments: data.internships[index]);
+              }
+            },
+            child: InternshipItem(
+                title: data.internships[index].title, approved: done),
+          );
+        },
         itemCount: data?.internships.length,
       ),
     );
@@ -45,7 +59,7 @@ class InternshipScreen extends StatelessWidget {
       centerTitle: true,
       title: const Text(
         'Internships',
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: thirdColor, fontSize: 24),
       ),
       actions: [
         IconButtonWidget(

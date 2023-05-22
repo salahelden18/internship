@@ -12,9 +12,9 @@ class DataModel extends Equatable {
   final String email;
   final String name;
   final String profilePic;
-  final String departmentName;
-  final int department;
-  final int year;
+  final String? departmentName;
+  final int? department;
+  final int? year;
   final List<DownloadableFiles> downloadableFiles;
   final List<JobModel> jobs;
   final List<AnnouncementModel> announcement;

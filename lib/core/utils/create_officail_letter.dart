@@ -7,7 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
-void createOfficialLetter(String companyName, String email) async {
+void createOfficialLetter(
+    String companyName, String email, String coordinatorName) async {
   final format = DateFormat.yMMMd('en');
   final dateFormated = format.format(DateTime.now());
 
@@ -50,7 +51,7 @@ void createOfficialLetter(String companyName, String email) async {
               pw.Align(
                 alignment: pw.Alignment.centerRight,
                 child: pw.Text(
-                  'Coordinator Name',
+                  getNameFromEmail(coordinatorName),
                   style: const pw.TextStyle(fontSize: 16),
                 ),
               ),

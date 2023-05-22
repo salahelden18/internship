@@ -16,6 +16,7 @@ ThemeData lightThemeData = ThemeData(
       color: thirdColor,
     ),
   ),
+  fontFamily: 'Arima',
   textTheme: TextTheme(
     // for main title
     titleLarge: const TextStyle(

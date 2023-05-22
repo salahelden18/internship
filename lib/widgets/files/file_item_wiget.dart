@@ -12,6 +12,7 @@ class FileItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -31,13 +32,17 @@ class FileItemWidget extends StatelessWidget {
             text,
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
-            style:
-                Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 24),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(fontSize: width <= 320 ? 18 : 24),
           ),
           const Spacer(),
           Row(
             children: [
-              Image.asset('assets/images/intern.png'),
+              Image.asset('assets/images/intern.png',
+                  height: width <= 320 ? 40 : null,
+                  width: width <= 320 ? 40 : null),
               const Spacer(),
             ],
           ),

@@ -15,7 +15,9 @@ class AuthenticateService {
         'username': email,
         'password': password,
       }),
-      headers: {'content-type': 'application/json'},
+      headers: {
+        'content-type': 'application/json',
+      },
     );
 
     final decodedResponse = jsonDecode(response.body);

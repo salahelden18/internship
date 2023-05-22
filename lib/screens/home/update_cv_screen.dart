@@ -88,6 +88,7 @@ class _UpdateCvScreenState extends State<UpdateCvScreen> {
                         'Show Cv',
                       ),
                     ),
+                  const SpaceHeight(),
                   BlocConsumer<HomeCubit, HomeStates>(
                     listener: (context, state) {
                       if (state is UpdatingErrorState) {

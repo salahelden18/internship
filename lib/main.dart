@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/core/theme/app_light_theme.dart';
 import 'package:internship/screens/announcement/announcement_screen.dart';
+import 'package:internship/screens/careerCenter/career_home_screen.dart';
 import 'package:internship/screens/changePassword/change_password_screen.dart';
 import 'package:internship/screens/changePassword/cubit/change_password_cubit.dart';
 import 'package:internship/screens/files_screen.dart';
@@ -13,6 +14,8 @@ import 'package:internship/screens/internship_status_screen.dart';
 import 'package:internship/screens/job/cubit/job_cubit.dart';
 import 'package:internship/screens/job/job_details_screen.dart';
 import 'package:internship/screens/job/job_screen.dart';
+import 'package:internship/screens/officialLetter/cubit/officialLetterCubit.dart';
+import 'package:internship/screens/officialLetter/officailLettersScreen.dart';
 import 'package:internship/screens/profile_screen.dart';
 import 'package:internship/screens/staticScreens/about_screen.dart';
 import 'package:internship/screens/auth/auth_screen.dart';
@@ -26,6 +29,7 @@ import 'package:internship/services/authenticate_service.dart';
 import 'package:internship/services/change_password_service.dart';
 import 'package:internship/services/data_service.dart';
 import 'package:internship/services/job_service.dart';
+import 'package:internship/services/official_letter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
@@ -52,6 +56,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (_) => HomeCubit(DataService())),
         BlocProvider(create: (_) => JobCubit(JobService())),
+        BlocProvider(create: (_) => LetterCubit(OfficialLetterService()))
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -62,10 +67,13 @@ class MyApp extends StatelessWidget {
             if (state is AuthLoadingState) {
               print('Loading Splash ');
               return const SplashScreen();
-            } else if (state is AuthenticatedState) {
+            } else if (state is StudentAuthenticatedState) {
               BlocProvider.of<HomeCubit>(context).getData();
               print('Entered the Home');
               return const HomeScreen();
+            } else if (state is CareerCenterAuthenticatedState) {
+              print('Here');
+              return const CareerHomeScreen();
             } else {
               print('Came Here');
               return const AuthScreen();
@@ -89,6 +97,7 @@ class MyApp extends StatelessWidget {
               const InternshipApplayScreen(),
           InternshipStatusScreen.routeName: (ctx) =>
               const InternshipStatusScreen(),
+          OfficailLetterScreen.routeName: (ctx) => const OfficailLetterScreen(),
         },
       ),
     );

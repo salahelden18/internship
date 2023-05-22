@@ -78,8 +78,9 @@ class _AuthScreenState extends State<AuthScreen>
                   AnimatedBuilder(
                     animation: _animationController,
                     child: Container(
-                      height: 368,
-                      width: 326,
+                      height:
+                          authentication == Authentication.signin ? 380 : 300,
+                      width: double.infinity,
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                         color: const Color(0xffFBCD05).withOpacity(0.40),
@@ -91,7 +92,7 @@ class _AuthScreenState extends State<AuthScreen>
                       child: Padding(
                         padding: const EdgeInsets.only(
                           top: 30,
-                          right: 60,
+                          right: 70,
                           left: 20,
                           bottom: 10,
                         ),
@@ -128,24 +129,25 @@ class _AuthScreenState extends State<AuthScreen>
           children: [
             Text(
               authentication == Authentication.signin ? 'Login' : 'Register',
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: thirdColor,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+                  .copyWith(color: thirdColor, fontSize: 20),
             ),
             const Icon(
               Icons.person_2_outlined,
               color: thirdColor,
-              size: 40,
+              size: 30,
             ),
           ],
         ),
         const SizedBox(height: 10),
         TextFormFieldWidget(
-          hintText: 'Enter Your Email',
+          hintText: 'Email',
           controller: _emailController,
           validator: (val) {
             if (val!.isEmpty) {
-              return 'Please Enter Your Email';
+              return 'Enter Email';
             }
             return null;
           },
@@ -154,11 +156,11 @@ class _AuthScreenState extends State<AuthScreen>
         const SizedBox(height: 10),
         if (authentication == Authentication.signin)
           TextFormFieldWidget(
-            hintText: 'Enter Your Password',
+            hintText: 'Password',
             controller: _passwordController,
             validator: (val) {
               if (val!.isEmpty) {
-                return 'Please Enter Your Password';
+                return 'Enter Password';
               }
               return null;
             },
@@ -176,10 +178,12 @@ class _AuthScreenState extends State<AuthScreen>
                     : Authentication.signin;
               });
             },
-            style: TextButton.styleFrom(),
             child: Text(
               authentication == Authentication.signin ? 'Register?' : 'Login?',
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontSize: 20),
             ),
           ),
         ),

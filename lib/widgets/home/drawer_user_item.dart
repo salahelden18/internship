@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:internship/core/constants/api_constants.dart';
 import 'package:internship/core/utils/get_name_from_email.dart';
 import 'package:internship/screens/home/cubit/home_cubit.dart';
 import 'package:internship/screens/home/update_cv_screen.dart';
@@ -19,7 +20,7 @@ class DrawerUserItem extends StatelessWidget {
               radius: 40,
               backgroundImage: NetworkImage(
                 userData!.profilePic.isNotEmpty
-                    ? userData.profilePic
+                    ? '${ApiConstants.baseUrl}/media/${userData.profilePic}'
                     : 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c29mdHdhcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
               ),
             ),

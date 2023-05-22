@@ -10,4 +10,6 @@ class ApiConstants {
   static const String internSubmit = '$baseUrl/student/api/intershipsubmittion';
   static const String updateUser = '$baseUrl/student/api/update';
   static const String registerUrl = '$baseUrl/api/register';
+  static const String officialLetter = '$baseUrl/student/api/requestletter';
+  static const String getAllLetters = '$baseUrl/student/api/requestletters';
 }

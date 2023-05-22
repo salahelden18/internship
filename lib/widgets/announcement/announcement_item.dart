@@ -23,7 +23,7 @@ class AnnouncementItem extends StatelessWidget {
         child: Row(
           children: [
             Flexible(
-              flex: 1,
+              flex: 2,
               child: SizedBox(
                 width: 60,
                 child: Image.asset(

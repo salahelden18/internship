@@ -41,9 +41,11 @@ class MyCustomButton extends StatelessWidget {
           ),
           child: Align(
             alignment: Alignment.center,
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 18, color: Colors.white),
+            child: FittedBox(
+              child: Text(
+                text,
+                style: const TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
           ),
         ),

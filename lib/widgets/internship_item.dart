@@ -7,9 +7,11 @@ class InternshipItem extends StatelessWidget {
   const InternshipItem({
     super.key,
     required this.title,
+    required this.approved,
   });
 
   final String title;
+  final bool approved;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,9 @@ class InternshipItem extends StatelessWidget {
                     height: 40,
                   ),
                   Image.asset(
-                    'assets/images/waiting.png',
+                    approved
+                        ? 'assets/images/ok.png'
+                        : 'assets/images/waiting.png',
                     height: 30,
                     width: 30,
                   )

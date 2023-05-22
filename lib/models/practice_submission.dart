@@ -5,10 +5,10 @@ class PracticeSubmissions extends Equatable {
   final int id;
   final String added;
   final int status;
-  final String uploadForm;
+  final String? uploadForm;
   final String? note;
   final String? companyHistory;
-  final String trancriptFile;
+  final String? trancriptFile;
   final bool isInternational;
   final int student;
   final int practise;

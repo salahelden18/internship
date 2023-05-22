@@ -13,9 +13,15 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(AuthLoginLoadingState());
 
     try {
-      await _authenticateService.login(email, password);
+      LoginModel loginModel = await _authenticateService.login(email, password);
 
-      emit(AuthenticatedState());
+      if (loginModel.type == 'Career Center') {
+        emit(CareerCenterAuthenticatedState());
+      } else {
+        emit(StudentAuthenticatedState());
+      }
+
+      // emit(AuthenticatedState());
     } on HttpException catch (e) {
       emit(AuthenticateErrorState(e.message));
     } catch (e) {
@@ -48,7 +54,11 @@ class AuthCubit extends Cubit<AuthStates> {
       if (loginModel == null) {
         emit(NotAuthenticatedState());
       } else {
-        emit(AuthenticatedState());
+        if (loginModel.type == 'Career Center') {
+          emit(CareerCenterAuthenticatedState());
+        } else {
+          emit(StudentAuthenticatedState());
+        }
       }
     } catch (e) {
       print(e);

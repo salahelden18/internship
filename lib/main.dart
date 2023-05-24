@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/core/theme/app_light_theme.dart';
 import 'package:internship/screens/announcement/announcement_screen.dart';
+import 'package:internship/screens/careerCenter/approved_screens.dart';
 import 'package:internship/screens/careerCenter/career_home_screen.dart';
+import 'package:internship/screens/careerCenter/cubit/career_cubit.dart';
+import 'package:internship/screens/careerCenter/services/career_service.dart';
+import 'package:internship/screens/careerCenter/sgk_screen.dart';
 import 'package:internship/screens/changePassword/change_password_screen.dart';
 import 'package:internship/screens/changePassword/cubit/change_password_cubit.dart';
 import 'package:internship/screens/files_screen.dart';
@@ -56,7 +60,8 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (_) => HomeCubit(DataService())),
         BlocProvider(create: (_) => JobCubit(JobService())),
-        BlocProvider(create: (_) => LetterCubit(OfficialLetterService()))
+        BlocProvider(create: (_) => LetterCubit(OfficialLetterService())),
+        BlocProvider(create: (_) => CareerCubit(CareerService())),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -72,6 +77,7 @@ class MyApp extends StatelessWidget {
               print('Entered the Home');
               return const HomeScreen();
             } else if (state is CareerCenterAuthenticatedState) {
+              context.read<CareerCubit>().getAllRequests();
               print('Here');
               return const CareerHomeScreen();
             } else {
@@ -98,6 +104,8 @@ class MyApp extends StatelessWidget {
           InternshipStatusScreen.routeName: (ctx) =>
               const InternshipStatusScreen(),
           OfficailLetterScreen.routeName: (ctx) => const OfficailLetterScreen(),
+          ApprovedScreen.routeName: (ctx) => const ApprovedScreen(),
+          SgkScreen.routeName: (ctx) => const SgkScreen(),
         },
       ),
     );

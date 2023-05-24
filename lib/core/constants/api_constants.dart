@@ -12,4 +12,6 @@ class ApiConstants {
   static const String registerUrl = '$baseUrl/api/register';
   static const String officialLetter = '$baseUrl/student/api/requestletter';
   static const String getAllLetters = '$baseUrl/student/api/requestletters';
+  static const String careerGetAllRequests = '$baseUrl/career/api/';
+  static const String updateSgkFile = '$baseUrl/career/api/insurances/';
 }

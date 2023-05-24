@@ -75,10 +75,11 @@ class _InternshipApplayScreenState extends State<InternshipApplayScreen>
 
   @override
   Widget build(BuildContext context) {
-    final fetchedData =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final internshipModel = fetchedData['model'] as InternshipModel;
-    final email = fetchedData['email'] as String;
+    // final fetchedData =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final internshipModel =
+        ModalRoute.of(context)!.settings.arguments as InternshipModel;
+    // final email = fetchedData['email'] as String;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton:

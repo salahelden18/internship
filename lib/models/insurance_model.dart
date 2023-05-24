@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class InsuranceModel extends Equatable {
-  final String title;
-  final String description;
-  final String? insuranceFile;
+  final String? title;
+  final String? description;
+  String? insuranceFile;
   // final
 
-  const InsuranceModel({
+  InsuranceModel({
     required this.description,
     required this.insuranceFile,
     required this.title,

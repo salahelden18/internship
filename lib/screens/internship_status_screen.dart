@@ -16,6 +16,8 @@ class InternshipStatusScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final data =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final internshipModel =
         ModalRoute.of(context)!.settings.arguments as InternshipModel;
     var internStatus = internshipModel.practiceSubmissions.firstWhere(
@@ -57,8 +59,9 @@ class InternshipStatusScreen extends StatelessWidget {
               text: 'Sumbit Again',
               onPress: () {
                 Navigator.of(context).pushNamed(
-                    InternshipApplayScreen.routeName,
-                    arguments: internshipModel);
+                  InternshipApplayScreen.routeName,
+                  arguments: internshipModel,
+                );
               },
             ),
         ],

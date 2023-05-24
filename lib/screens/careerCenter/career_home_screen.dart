@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/core/global/colors.dart';
 import 'package:internship/screens/auth/cubit/auth_cubit.dart';
+import 'package:internship/screens/careerCenter/approved_screens.dart';
 import 'package:internship/widgets/icon_button_widget.dart';
 import 'package:internship/widgets/logo_widget.dart';
 import 'package:internship/widgets/space_height.dart';
@@ -24,7 +25,7 @@ class CareerHomeScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButtonWidget(
-            icon: Icons.person_2_outlined,
+            icon: Icons.exit_to_app,
             onPress: () {
               context.read<AuthCubit>().logout();
               // Navigator.of(context).pushNamed(ProfileScreen.routeName);
@@ -39,39 +40,44 @@ class CareerHomeScreen extends StatelessWidget {
             size: size,
           ),
           const SpaceHeight(),
-          Container(
-            padding: const EdgeInsets.all(15),
-            height: 150,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [primaryColor, secondaryColor],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                borderRadius: BorderRadius.circular(25)),
-            child: Column(
-              children: [
-                Text(
-                  'Approved Internships',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/images/intern.png',
-                      height: 40,
-                      width: 40,
-                    ),
-                    const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(ApprovedScreen.routeName);
+            },
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              height: 150,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [primaryColor, secondaryColor],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(25)),
+              child: Column(
+                children: [
+                  Text(
+                    'Approved Internships',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'assets/images/intern.png',
+                        height: 40,
+                        width: 40,
+                      ),
+                      const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
           const SpaceHeight(),

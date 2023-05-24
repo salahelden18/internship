@@ -34,15 +34,15 @@ class InternshipScreen extends StatelessWidget {
               if (data.internships[index].practiceSubmissions.isEmpty) {
                 Navigator.of(context).pushNamed(
                   InternshipApplayScreen.routeName,
-                  arguments: {
-                    'model': data.internships[index],
-                    'email': data.email,
-                  },
+                  arguments: data.internships[index],
+                  // 'email': data.email,
                 );
               } else {
                 Navigator.of(context).pushNamed(
-                    InternshipStatusScreen.routeName,
-                    arguments: data.internships[index]);
+                  InternshipStatusScreen.routeName,
+                  arguments: data.internships[index],
+                  // 'email': data.email
+                );
               }
             },
             child: InternshipItem(

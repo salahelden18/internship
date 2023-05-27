@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AnnouncementItem extends StatelessWidget {
-  const AnnouncementItem({
+class MessageItem extends StatelessWidget {
+  const MessageItem({
     super.key,
-    required this.text,
-    required this.content,
+    required this.name,
+    required this.email,
     required this.date,
     required this.icon,
   });
-  final String text;
-  final String content;
+  final String name;
+  final String email;
   final String date;
   final String icon;
 
@@ -43,19 +43,23 @@ class AnnouncementItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    text,
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   Text(
-                    content,
-                    maxLines: 2,
+                    '($email)',
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                  const SizedBox(height: 10),
                   Text(date),
                 ],
               ),

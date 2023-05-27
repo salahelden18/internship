@@ -90,10 +90,8 @@ class StepperWidget extends StatelessWidget {
                       const Text('You Can Now Start Your Internship'),
                       TextButton(
                         onPressed: () async {
-                          print('Here');
                           File file = await downloadFile(
                               '${ApiConstants.baseUrl}/${internStatus.insurance.insuranceFile}');
-                          print('Downloaded');
                           await openFile(file);
                         },
                         child: const Text('See SGK'),

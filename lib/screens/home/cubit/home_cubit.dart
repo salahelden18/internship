@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/core/global/http_exception.dart';
+import 'package:internship/models/chats_model.dart';
 import 'package:internship/models/data_model.dart';
+import 'package:internship/models/message_model.dart';
 import 'package:internship/models/practice_submission.dart';
 import 'package:internship/screens/home/cubit/home_cubit_states.dart';
 import 'package:internship/services/data_service.dart';
@@ -70,4 +72,30 @@ class HomeCubit extends Cubit<HomeStates> {
   //     emit(const UpdatingErrorState('Something Went Wrong'));
   //   }
   // }
+
+  Future<void> addMessage(int receiverId, String message) async {
+    emit(AddLoadingMessage());
+    try {
+      ChatsModel chatsModel =
+          await _dataService.addMessage(receiverId, message);
+
+      int? index = dataModel?.chats.indexWhere(
+        (element) => element.id == chatsModel.id,
+      );
+
+      if (index == null || index == -1) {
+        dataModel?.chats.add(chatsModel);
+      } else {
+        dataModel?.chats[index].messages
+            .add(chatsModel.messages[chatsModel.messages.length - 1]);
+      }
+      emit(AddLoadedMessage());
+    } on HttpException catch (e) {
+      print(e);
+      emit(AddErrorMessage(e.message));
+    } catch (e) {
+      print(e);
+      emit(const AddErrorMessage('Something Went Wrong'));
+    }
+  }
 }

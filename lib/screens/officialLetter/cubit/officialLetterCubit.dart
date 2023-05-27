@@ -9,11 +9,13 @@ class LetterCubit extends Cubit<LetterStates> {
 
   LetterCubit(this.officialLetterService) : super(InitialLetterState());
 
-  Future<void> letterApply(int id, String companyName) async {
+  Future<void> letterApply(
+      int id, String companyName, String transcript) async {
     emit(LoadingLetterState());
 
     try {
-      await officialLetterService.applyForOfficialLetter(id, companyName);
+      await officialLetterService.applyForOfficialLetter(
+          id, companyName, transcript);
       emit(LoadedLetterState());
     } on HttpException catch (e) {
       emit(ErrorLetterState(e.message));

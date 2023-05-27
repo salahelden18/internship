@@ -71,8 +71,10 @@ class _AnnouncementScreenState extends State<AnnouncementScreen>
                       itemBuilder: (context, index) => AnnouncementItem(
                         text: announcementData[index].title,
                         content: announcementData[index].content,
-                        date: format.format(DateTime.parse(
-                            announcementData[index].datePublished)),
+                        date: format.format(
+                          DateTime.parse(announcementData[index].datePublished),
+                        ),
+                        icon: 'annouce.png',
                       ),
                     ),
                   ),

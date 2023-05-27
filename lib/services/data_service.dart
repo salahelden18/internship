@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:internship/core/constants/api_constants.dart';
 import 'package:internship/core/global/http_exception.dart';
 import 'package:internship/core/utils/get_token.dart';
+import 'package:internship/models/chats_model.dart';
 import 'package:internship/models/data_model.dart';
 import 'package:internship/models/practice_submission.dart';
 
@@ -65,7 +66,6 @@ class DataService {
       final decodedResponse = jsonDecode(responseBody);
       return decodedResponse['cv'];
     } else {
-      print(responseBody);
       throw HttpException('Unable to upload file');
     }
   }
@@ -131,14 +131,11 @@ class DataService {
 
     final decodedResponse = jsonDecode(responseBody);
 
-    print(decodedResponse);
-
     if (response.statusCode == 201) {
       PracticeSubmissions practiceSubmission =
           PracticeSubmissions.fromJson(decodedResponse);
       return practiceSubmission;
     } else {
-      print(responseBody);
       throw HttpException('Unable to upload file');
     }
   }
@@ -175,8 +172,35 @@ class DataService {
       final decodedResponse = jsonDecode(responseBody);
       return decodedResponse['profile_pic'];
     } else {
-      print(responseBody);
       throw HttpException('Unable to upload file');
+    }
+  }
+
+  Future<ChatsModel> addMessage(int receiverId, String message) async {
+    String? token = await getToken();
+    final response = await http.post(Uri.parse(ApiConstants.addMessage),
+        body: jsonEncode({
+          'reciever_id': receiverId,
+          'message_content': message,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token $token',
+        });
+
+    final decodedResponse = jsonDecode(response.body);
+
+    if (response.statusCode != 201) {
+      throw HttpException('Unable To Send Message');
+    } else {
+      Map<String, dynamic> chat = decodedResponse;
+
+      final chatModel = ChatsModel.fromJson(chat);
+      return chatModel;
+      // List<dynamic> chat = decodedResponse['messages'];
+      // final message = messages[messages.length - 1];
+      // print(message);
+      // return MessageModel.fromJson(message);
     }
   }
 }

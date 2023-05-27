@@ -47,3 +47,16 @@ class ApplyForInternErrorState extends HomeStates {
   @override
   List<Object> get props => [message];
 }
+
+class AddLoadingMessage extends HomeStates {}
+
+class AddLoadedMessage extends HomeStates {}
+
+class AddErrorMessage extends HomeStates {
+  final String message;
+
+  const AddErrorMessage(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

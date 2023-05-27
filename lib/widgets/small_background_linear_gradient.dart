@@ -51,12 +51,14 @@ class SmallbackgroundLinearGradient extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              text,
-              style: const TextStyle(
-                fontSize: 20,
-                letterSpacing: 2,
-                color: Colors.white,
+            FittedBox(
+              child: Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 20,
+                  letterSpacing: 2,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

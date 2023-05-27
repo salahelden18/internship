@@ -18,6 +18,9 @@ import 'package:internship/screens/internship_status_screen.dart';
 import 'package:internship/screens/job/cubit/job_cubit.dart';
 import 'package:internship/screens/job/job_details_screen.dart';
 import 'package:internship/screens/job/job_screen.dart';
+import 'package:internship/screens/messages/add_message.dart';
+import 'package:internship/screens/messages/chat_messages.dart';
+import 'package:internship/screens/messages/messages_screen.dart';
 import 'package:internship/screens/officialLetter/cubit/officialLetterCubit.dart';
 import 'package:internship/screens/officialLetter/officailLettersScreen.dart';
 import 'package:internship/screens/profile_screen.dart';
@@ -106,6 +109,9 @@ class MyApp extends StatelessWidget {
           OfficailLetterScreen.routeName: (ctx) => const OfficailLetterScreen(),
           ApprovedScreen.routeName: (ctx) => const ApprovedScreen(),
           SgkScreen.routeName: (ctx) => const SgkScreen(),
+          MessagesScreen.routeName: (ctx) => const MessagesScreen(),
+          AddMessageScreen.routeName: (ctx) => const AddMessageScreen(),
+          ChatMessages.routeName: (ctx) => const ChatMessages(),
         },
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:internship/screens/auth/cubit/auth_cubit.dart';
 import 'package:internship/screens/files_screen.dart';
+import 'package:internship/screens/messages/messages_screen.dart';
 import 'package:internship/screens/staticScreens/about_screen.dart';
 import 'package:internship/screens/settings/settings_screen.dart';
 import 'package:internship/widgets/divider_widget.dart';
@@ -39,7 +40,12 @@ class DrawerWidget extends StatelessWidget {
                           },
                           text: 'Files'),
                       const SpaceHeight(),
-                      DrawerItem(onPress: () {}, text: 'My Messages'),
+                      DrawerItem(
+                          onPress: () {
+                            Navigator.of(context)
+                                .pushNamed(MessagesScreen.routeName);
+                          },
+                          text: 'My Messages'),
                       const SpaceHeight(),
                       DrawerItem(
                           onPress: () {

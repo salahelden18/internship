@@ -1,7 +1,11 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:internship/core/global/colors.dart';
+import 'package:internship/core/utils/pick_file.dart';
 import 'package:internship/screens/officialLetter/officailLettersScreen.dart';
 
 import '../../core/widgets/show_toast.dart';
@@ -13,6 +17,7 @@ import '../space_height.dart';
 
 Widget getFloatingVerticalButtons(
     BuildContext context, TextEditingController controller, int id) {
+  File? transcriptFileToBeSended;
   return SpeedDial(
     animatedIcon: AnimatedIcons.menu_close,
     animatedIconTheme: const IconThemeData(size: 22),
@@ -68,6 +73,30 @@ Widget getFloatingVerticalButtons(
                     const SpaceHeight(),
                     Align(
                       alignment: Alignment.center,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1.5,
+                              color: thirdColor,
+                            ),
+                          ),
+                        ),
+                        onPressed: () async {
+                          File? trancriptFile = await pickFile();
+
+                          if (trancriptFile == null) {
+                            showToast('no file picked', Colors.orange);
+                          } else {
+                            transcriptFileToBeSended = trancriptFile;
+                          }
+                        },
+                        child: const Text('Upload Trainscript'),
+                      ),
+                    ),
+                    const SpaceHeight(),
+                    Align(
+                      alignment: Alignment.center,
                       child: FractionallySizedBox(
                         widthFactor: 0.5,
                         child: BlocConsumer<LetterCubit, LetterStates>(
@@ -89,7 +118,7 @@ Widget getFloatingVerticalButtons(
                             height: 40,
                             width: 250,
                             text: 'Ask For Official Letter',
-                            onPress: () {
+                            onPress: () async {
                               if (controller.text.isEmpty) {
                                 showDialog(
                                   context: context,
@@ -112,9 +141,17 @@ Widget getFloatingVerticalButtons(
                                   ),
                                 );
                               } else {
-                                context
-                                    .read<LetterCubit>()
-                                    .letterApply(id, controller.text);
+                                if (transcriptFileToBeSended == null) {
+                                  showToast('please Pick a file', Colors.red);
+                                } else {
+                                  if (context.mounted) {
+                                    context.read<LetterCubit>().letterApply(
+                                        id,
+                                        controller.text,
+                                        transcriptFileToBeSended!.path);
+                                  }
+                                }
+
                                 // createOfficialLetter(
                                 //     controller.text, email, coordinatorName);
                               }

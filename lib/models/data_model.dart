@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:internship/models/announcement_model.dart';
+import 'package:internship/models/chats_model.dart';
 import 'package:internship/models/downloadable_files_model.dart';
 import 'package:internship/models/internship_model.dart';
 
@@ -19,6 +20,7 @@ class DataModel extends Equatable {
   final List<JobModel> jobs;
   final List<AnnouncementModel> announcement;
   final List<InternshipModel> internships;
+  final List<ChatsModel> chats;
 
   DataModel({
     required this.user,
@@ -33,6 +35,7 @@ class DataModel extends Equatable {
     required this.year,
     required this.email,
     required this.internships,
+    required this.chats,
   });
 
   factory DataModel.fromJson(Map<String, dynamic> json) {
@@ -55,6 +58,9 @@ class DataModel extends Equatable {
     final internships =
         internshipList.map((e) => InternshipModel.fromJson(e)).toList();
 
+    List<dynamic> chatList = json['chats'];
+    final chats = chatList.map((e) => ChatsModel.fromJson(e)).toList();
+
     return DataModel(
       cv: json['cv'],
       user: json['user'],
@@ -68,6 +74,7 @@ class DataModel extends Equatable {
       jobs: jobs,
       announcement: announcements,
       internships: internships,
+      chats: chats,
     );
   }
 

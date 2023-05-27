@@ -10,7 +10,6 @@ import 'package:internship/models/internship_model.dart';
 import 'package:internship/screens/home/cubit/home_cubit.dart';
 import 'package:internship/screens/home/cubit/home_cubit_states.dart';
 import 'package:internship/widgets/background_linear_gradient.dart';
-import 'package:internship/widgets/create_official_letter_widget.dart';
 import 'package:internship/widgets/custom_elevated_button.dart';
 import 'package:internship/widgets/header_widget.dart';
 import 'package:internship/widgets/home/floating_vertical_button.dart';

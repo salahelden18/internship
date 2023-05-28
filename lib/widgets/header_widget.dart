@@ -21,7 +21,10 @@ class HeaderWidget extends StatelessWidget {
           children: [
             Text(
               text,
-              style: Theme.of(context).textTheme.displaySmall,
+              style: Theme.of(context)
+                  .textTheme
+                  .displaySmall!
+                  .copyWith(fontSize: 20),
             ),
             Icon(
               icon,

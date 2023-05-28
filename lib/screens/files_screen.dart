@@ -88,8 +88,8 @@ class _FilesScreenState extends State<FilesScreen> {
         IconButtonWidget(
           icon: Icons.home_outlined,
           onPress: () {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                HomeScreen.routeName, (route) => false);
+            Navigator.of(context)
+                .popUntil((route) => route.settings.name == '/');
           },
         ),
         IconButtonWidget(

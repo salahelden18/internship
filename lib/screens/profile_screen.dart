@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SpaceHeight(),
           Text(
-            getNameFromEmail(data.email),
+            data.email.isEmpty ? 'Unknown' : getNameFromEmail(data.email),
             style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.black,

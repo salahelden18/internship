@@ -31,6 +31,8 @@ class _OfficailLetterScreenState extends State<OfficailLetterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    print(width);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -45,8 +47,8 @@ class _OfficailLetterScreenState extends State<OfficailLetterScreen> {
           IconButtonWidget(
               icon: Icons.home_outlined,
               onPress: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    HomeScreen.routeName, (route) => false);
+                Navigator.of(context)
+                    .popUntil((route) => route.settings.name == '/');
               }),
         ],
       ),
@@ -71,7 +73,7 @@ class _OfficailLetterScreenState extends State<OfficailLetterScreen> {
                     style: Theme.of(context)
                         .textTheme
                         .headlineLarge!
-                        .copyWith(fontSize: 24)),
+                        .copyWith(fontSize: width <= 320 ? 16 : 24)),
                 subtitle: Text(request[index].companyName ?? 'Error'),
                 trailing: _buildStatus(request[index]),
                 shape: RoundedRectangleBorder(

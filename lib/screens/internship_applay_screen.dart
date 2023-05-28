@@ -241,6 +241,7 @@ class _InternshipApplayScreenState extends State<InternshipApplayScreen>
                     listener: (context, state) {
                       if (state is ApplyForInternSuccessState) {
                         showToast('Applied Successfully', Colors.green);
+                        Navigator.pop(context);
                       } else if (state is ApplyForInternErrorState) {
                         showToast(state.message, Colors.red);
                       }

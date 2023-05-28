@@ -45,8 +45,10 @@ class SmallbackgroundLinearGradient extends StatelessWidget {
                   icon: Icons.home_outlined,
                   color: Colors.white,
                   onPress: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        HomeScreen.routeName, (route) => false);
+                    Navigator.of(context).popUntil((route) {
+                      print(route.settings.name);
+                      return route.settings.name == '/';
+                    });
                   },
                 ),
               ],

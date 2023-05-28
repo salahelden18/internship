@@ -52,10 +52,12 @@ class DrawerUserItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(getNameFromEmail(userData.email)),
+              Text(userData.email.isEmpty
+                  ? 'Unknown'
+                  : getNameFromEmail(userData.email)),
               const SpaceHeight(height: 10),
               Text(
-                userData.email,
+                userData.email.isEmpty ? 'Unknown' : userData.email,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall,
               ),

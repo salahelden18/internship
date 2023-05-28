@@ -57,10 +57,10 @@ class CareerHomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25)),
               child: Column(
                 children: [
-                  Text(
-                    'Approved Internships',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+                  Text('Approved Internships',
+                      style: Theme.of(context).textTheme.titleLarge
+                      // .copyWith(fontSize: size.width <= 320 ? 20 : null),
+                      ),
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
